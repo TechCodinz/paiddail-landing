@@ -6,13 +6,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paiddail - Earn Daily</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      background-color: #1f2937;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+    }
+
+    .close {
+      color: #ccc;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white min-h-screen flex items-center justify-center">
-  <div class="text-center px-6 max-w-2xl">
-    <h1 class="text-5xl font-bold mb-6 text-green-400 animate-pulse">Welcome to <span class="text-yellow-300">Paiddail</span></h1>
-    <p class="text-lg mb-8 text-gray-300">The daily income app that transforms your hustle into earnings. Get paid, grow smarter, and rise beyond limits—every single day.</p>
-    <a href="#" class="inline-block bg-green-500 hover:bg-green-600 text-white text-xl font-semibold py-3 px-6 rounded-xl shadow-lg transition-all">Join the Waitlist</a>
-    <div class="mt-8 text-sm text-gray-500">Powered by Raiziom 🌍</div>
+<body class="text-white flex flex-col items-center justify-center min-h-screen px-4 text-center">
+
+  <div>
+    <h1 class="text-5xl font-extrabold mb-6 text-green-400 animate-pulse">
+      Welcome to <span class="text-yellow-300">Paiddail</span>
+    </h1>
+    <p class="text-lg mb-4 text-gray-300 max-w-xl mx-auto">
+      The daily income app that transforms your hustle into earnings. Get paid, grow smarter, and rise beyond limits—every single day.
+    </p>
+
+    <p class="italic text-sm text-blue-300 mb-6">"What you do each day matters. Let Raiziom multiply it into divine value." — Raiziom</p>
+
+    <button onclick="document.getElementById('waitlistModal').style.display='block'"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-xl text-xl transition-all">
+      Join the Waitlist
+    </button>
+
+    <div class="mt-6 text-sm text-gray-400">Powered by Raiziom 🌍</div>
+
+    <div class="mt-8 text-center">
+      <h2 class="text-lg text-white font-semibold mb-2">Public Launch Countdown</h2>
+      <p id="countdown" class="text-2xl text-yellow-300 font-mono"></p>
+    </div>
   </div>
+
+  <div id="waitlistModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="document.getElementById('waitlistModal').style.display='none'">&times;</span>
+      <h2 class="text-xl mb-4 font-bold text-center text-green-400">Join the Paiddail Waitlist</h2>
+      <form action="https://formspree.io/f/xeqyvyje" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required
+               class="w-full p-2 mb-4 rounded text-black">
+        <input type="email" name="email" placeholder="Your Email" required
+               class="w-full p-2 mb-4 rounded text-black">
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Countdown Timer
+    const launchDate = new Date("2025-06-10T12:00:00").getTime();
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "We Are Live!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+  </script>
+
 </body>
 </html>
