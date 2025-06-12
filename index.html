@@ -1,100 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Welcome to Paiddail</title>
-  <style>
-    body {
-      background: linear-gradient(120deg, #0f0f0f, #001a00);
-      color: #00ff66;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #b3ffcc;
-    }
-    form {
-      background-color: rgba(0, 50, 0, 0.3);
-      padding: 20px;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      box-shadow: 0 0 20px #00ff88;
-    }
-    input {
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      font-size: 1rem;
-    }
-    button {
-      background-color: #00cc66;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    #confirmation {
-      margin-top: 20px;
-      font-size: 1.1rem;
-      color: #80ffbf;
-      display: none;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Download Paiddail</title>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="static/js/app.js" defer></script>
 </head>
 <body>
-  <h1>Welcome to Paiddail</h1>
-  <p>Get daily income, grow smarter, rise with Raiziom.</p>
-  <form id="waitlist-form">
-    <input type="text" id="name" name="name" placeholder="Your Name" required />
-    <input type="email" id="email" name="email" placeholder="Your Email" required />
-    <button type="submit">Join Waitlist</button>
-  </form>
-  <div id="confirmation">✅ You've been added to the waitlist!</div>
+  <div class="container">
+    <img src="static/images/logo.png" alt="Paiddail Logo" class="logo">
+    <h1>Download Paiddail App</h1>
+    <p>Tap your download, scan your code, invite & earn:</p>
+    <a href="https://example.com/paiddail.apk" class="btn">Android (.apk)</a>
+    <a href="https://example.com/paiddail.ipa" class="btn">iOS (.ipa)</a>
 
-  <audio id="voice-confirmation" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
-
-  <script>
-    const form = document.getElementById('waitlist-form');
-    const confirmation = document.getElementById('confirmation');
-    const audio = document.getElementById('voice-confirmation');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-
-      try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbx13peePem9qss1J76WX_WJjcmP1LiWkc0_WlEVBve6_RMUBxA2KsAOTyUoNJun58Qtsg/exec', {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`,
-        });
-        confirmation.style.display = 'block';
-        audio.play();
-      } catch (error) {
-        alert('Error joining the waitlist.');
-        console.error(error);
-      }
-    });
-  </script>
+    <div class="referral">
+      <h3>Your Referral QR</h3>
+      <div id="qrcode"></div>
+      <p id="referral-link"></p>
+    </div>
+  </div>
 </body>
 </html>

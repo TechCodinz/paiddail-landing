@@ -1,2 +1,2 @@
-# Paiddail Landing Page
-This is the initial landing page for the Paiddail platform.
+# Paiddail App Download Page
+Static landing page for downloads and referral QR codes.
